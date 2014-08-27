@@ -12,3 +12,6 @@ Jared DuBose (Red)
     
 Scott Stewart
     Studying computer engineering and would like to be a hardware programmer.  I enjoy coding and I am a very competitive person.  I am the driving force behind all parts of competition for our game
+
+James Villanueva
+    Studying Computer Engineering with an emphasis on hardware programming. I spend a lot of time programming, as well as playing sports and making pizzas. 
