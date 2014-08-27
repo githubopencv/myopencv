@@ -15,3 +15,7 @@ Scott Stewart
 
 James Villanueva
     Studying Computer Engineering with an emphasis on hardware programming. I spend a lot of time programming, as well as playing sports and making pizzas. 
+
+Savpreet (Savi) Singh
+
+    Studying computer engineering, experienced mostly with hardware/embedded systems. If you need a microcontroller to blink a few LEDs, I'm your guy. I don't have any experience with mobile applications but am interested in learning more about it. 
