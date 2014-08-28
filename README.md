@@ -21,4 +21,5 @@ Savpreet (Savi) Singh
     Studying computer engineering, experienced mostly with hardware/embedded systems. If you need a microcontroller to blink a few LEDs, I'm your guy. I don't have any experience with mobile applications but am interested in learning more about it. 
 
 Tyler Parks
+
 	Studying computer and electrical engineering. I'm the quiet one.
