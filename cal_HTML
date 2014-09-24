@@ -16,6 +16,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 		<td>			
 			Monday:<br>
@@ -25,6 +26,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 		<td>
 		Tuesday:<br>
@@ -34,6 +36,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 		<td>
 		Wednesday:<br>
@@ -43,6 +46,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 		<td>
 		Thursday:<br>
@@ -52,6 +56,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 		<td>
 		Friday:<br>
@@ -61,6 +66,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 		<td>
 		Saturday:<br>
@@ -70,6 +76,7 @@
 			<input type="checkbox" name="time" value="time_slot">2:00 - 3:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">4:00 - 5:50 pm<br>
 			<input type="checkbox" name="time" value="time_slot">6:00 - 7:50 pm<br>
+			<input type="checkbox" name="time" value="time_slot">No Free Time<br>
 		</td>
 	</tr>
 	</table>
