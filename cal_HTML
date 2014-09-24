@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<center><h4> Test Scheduler - 2 Hour Blocks </h4></center>
+
+	<table>
+	<tr>
+
+		<td>
+			<h5> Group Member 1 </h5>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Sunday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Monday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Tuesday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Wednesday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Thursday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Friday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Saturday
+		</td>
+		</form>
+
+
+		<td>
+			<td>
+			<h5> Group Member 2 </h5>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Sunday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Monday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Tuesday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Wednesday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Thursday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Friday
+			</form>
+			<form action="formPHP.php" method="post">
+			<select name="item">
+			<option>8:00 - 9:50 am</option>
+			<option>10:00 - 11:50 am</option>
+			<option>12:00 - 1:50 pm</option>
+			<option>2:00 - 3:50 pm</option>
+			<option>4:00 - 5:50 pm</option>
+			<option>6:00 - 7:50 pm</option>
+			<option>8:00 - 9:50 pm</option>
+			</select>
+			Saturday
+			</td>
+		</td>
+		</form>
+
+	</tr>
+	</table>
+
+</body>
+</html>
