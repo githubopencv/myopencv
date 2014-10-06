@@ -1,0 +1,42 @@
+<!--Savpreet Singh-->
+<!--CSCI 430 - Group Scheduler/Manager Project-->
+<!--Intro Page-->
+
+
+<!DOCTYPE html>
+<html>
+
+	<style>
+		header {
+			background-color:black;
+			color:white;
+			text-align:center;
+			padding:5px;	 
+		}
+	</style>
+	
+<body>
+	
+	<header>
+	<h2>Welcome to the Group Management Project!</h2>
+	</header>
+	<!--<center><h2>Welcome to the Group Management Project!</h2></center>-->
+	<center><h4>Please login to manage your group:</h4></center>
+	
+	<center>
+		<form action="user_login.php" method="post"> <!-- User Login/Pass input + submit button -->
+			Username: <input type="text" name="username"><br>
+			Password: <input type="text" name="password"><br>
+			<input type="submit" value="Submit">
+		</form>
+	</center>
+	
+	<center>
+		<h4>If you need to register, please click here:</h4>
+		<form action="user_login.php" method="post"> <!-- If User has not registered yet -->
+			<input type="submit" value="Register">
+		</form>
+	</center>
+	
+</body>
+</html>
