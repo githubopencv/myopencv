@@ -2,41 +2,33 @@
 <html>
 <body>
 
-
 <?php
-/*
-function sqlconnect($sqld, $user, $pw, $db_name)
-{
-	$con = mysqli_connect($sqld, $user, $pw, $db_name);
+//function connect() 
+//{
+	echo "test commenced<br>";
+
+	$con = mysqli_connect("localhost", "root", "mysql", "employees");  
 
 	if( mysqli_connect_errno() )
-		echo "<p>Failed to connect to MySQL: </p>" . mysqli_connect_error();
+	{
+		echo "ERR: could not connect to MySQL: " . mysqli_connect_error() . "<br>";
+	}
 	else
-		echo "<p>connection established: </p>" . $con
+	{
+		echo "Connection Established $con<br>";
+	}
+
+	echo "test completed<br>";
 
 	return $con;
-} //end sqlconnect
+//}
 
-function sqlclose($con)
-{
-	mysqli_close($con);
+//echo "sql connection test <br>";
+//connect();
 
-}
-*/
-echo "<p>attempting connection </p>";
-//sqlconnect(127.0.0.1, root, "mysql", "test");
+//$result = mysqli_query
 
-function hi($name)
-{
-	$s "<p>hi $name</p>";
-	return $s;
-}
-
-//$t =  hi("dude");
-
-echo "<p>test " . hi("dude") . "</p>";
 ?>
 
 </body>
 </html>
-
