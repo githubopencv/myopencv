@@ -7,9 +7,16 @@
 //{
 	echo "test commenced<br>";
 
-	$con = mysqli_connect("localhost", "root", "mysql", "employees");  
+	$con = new mysqli('127.0.0.1', 'root', 'mysql', 'employees');  
 
-	if( mysqli_connect_errno() )
+	$str = mysqli_query($con, 'SELECT * FROM departments');
+
+	while ($row = mysqli_fetch_array($result) )
+	{
+	echo( '<p>' . $row['JokeText'] . ' ' . $row['JokeDate'] . '</p>');
+	}
+/*
+	if(!$con) //mysqli_connect_errno() )
 	{
 		echo "ERR: could not connect to MySQL: " . mysqli_connect_error() . "<br>";
 	}
@@ -17,10 +24,10 @@
 	{
 		echo "Connection Established $con<br>";
 	}
-
+*/
 	echo "test completed<br>";
 
-	return $con;
+//	return $con;
 //}
 
 //echo "sql connection test <br>";
