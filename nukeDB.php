@@ -8,27 +8,27 @@
   and brick our project. Only run from cmd with "php nukeDB.php"
   */
 
-	echo "Nuking databases from orbit...<br>";
+	echo "Nuking databases from orbit...\n";
 
 	$con = new mysqli('127.0.0.1', 'root'); 
 	mysqli_query($con, 'use mysql;'); 
 	
 	mysqli_query($con, 'drop database loginDB');
-	echo "dropped loginDB<br>";
+	echo "dropped loginDB\n";
 
 	mysqli_query($con, 'drop database groupMembersDB;');
-	echo "dropped groupMembersDB<br>";
+	echo "dropped groupMembersDB\n";
 
 	mysqli_query($con, 'drop database filesDB;');
-  echo "dropped filesDB<br>";
+  echo "dropped filesDB\n";
 
 	mysqli_query($con, 'drop database eventsDB;');
-	echo "dropped eventsDB<br>";
+	echo "dropped eventsDB\n";
   
 	mysqli_query($con, 'drop database calendarDB;');
-	echo "dropped calendarDB<br>";
+	echo "dropped calendarDB\n";
 
-	echo "Databases nuked<br>";
+	echo "Databases nuked\n";
 
 ?>
 
