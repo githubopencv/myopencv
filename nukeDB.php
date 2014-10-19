@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html>
-<body>
+
 <?php
   /*
   This script will drop all databases and tables created by createDB.php
   Don't run this unless you're REALLY certain you want to.
+  Also, don't make this script usable via Apache; 
+  anyone could type <our website>.com/nukeDB.php into firefox,
+  and brick our project. Only run from cmd with "php nukeDB.php"
   */
 
 	echo "Nuking databases from orbit...<br>";
@@ -30,5 +31,4 @@
 	echo "Databases nuked<br>";
 
 ?>
-</body>
-</html>
+
