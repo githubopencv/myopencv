@@ -18,27 +18,35 @@ padding:5px;
   //there should be a non-root user that oversees all file DB operations
   $connection = new mysqli('localhost','root','mysql','db');
   
-  if(!$connection) //print error and quit if no connection
+  if (!$connection) //print error and quit if no connection
   {
     echo('<p> Unable to connect to database. </p>');
 	  exit();
   }
-  else //else proceed with upload
+  else //if ( isset($_POST['uploadFile']) && $_FILES['uploadFile']['size'] > 0)
   {
+    
     //ensure date and time are configured correctly
     date_default_timezone_set('America/Los_Angeles');
+    
+    $tmpName = $_FILE['uploadFile']['tmpname'];
+    $f = fopen($tmpName, 'r');
+    $fileContent = fread($f, filesize($tmpName));
+    $fileContent = addslashes($fileContent); //escape special chars in file if present
+    $fileName = addslashes($tmpName); //escape special chars in file name if present
+    fclose($f);
     
     //checks should be run to ensure these are valid names,
     //and that this isn't a duplicate database entry
     $username = "defaultUser";
     $groupname = "defaultGroup";
     $postDateTime = date('Y-m-d H:i:s'); //mysql's date format 
-    $fileName = $_FILE['uploadFile']['name'];
-    $file = $_FILE['uploadFile'];
+    //$fileName = $_FILE['uploadFile']['name'];
+    //$file = $_FILE['uploadFile'];
     
     echo("Uploading " . $fileName);
     
-    $result = mysqli_query($connection, "INSERT INTO db.files (username, groupname, filename, postDateTime, file) values ('$username', '$groupname', '$filename', '$postDateTime', '$file' );");
+    $result = mysqli_query($connection, "INSERT INTO db.files (username, groupname, filename, postDateTime, file) values ('$username', '$groupname', '$filename', '$postDateTime', '$fileContent' );");
   
     //print upload errors
     if (!$result)

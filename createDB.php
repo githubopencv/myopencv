@@ -52,7 +52,7 @@
     echo "created groupMembers table\n";
 
 	//mysqli_query($connection, 'create database fileDB;');
-	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, file mediumblob);');
+	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, file longblob);');
   if (!$result)
   {
     $err = mysqli_error($connection);
