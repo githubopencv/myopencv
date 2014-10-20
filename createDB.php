@@ -14,14 +14,6 @@
 	$connection = new mysqli('127.0.0.1', 'root');  
 	mysqli_query($connection, 'use mysql;');
 	
-	/*
-	every user's login data is stored in loginDB.login
-	
-	username, password, and email are self-explanitory.
-	loggedIn is for tracking which users are logged in.
-	loginIP is the last IP from which a user logged in from.
-	sessionID is checking that a user's current login is valid.
-	*/
 	$result = mysqli_query($connection, 'create database db;');
 	if (!$result)
   {
@@ -30,6 +22,15 @@
   }
   else
     echo "created database db\n";
+	
+		/*
+	every user's login data is stored in db.login
+	
+	username, password, and email are self-explanitory.
+	loggedIn is for tracking which users are logged in.
+	loginIP is the last IP from which a user logged in from.
+	sessionID is checking that a user's current login is valid.
+	*/
 	
 	$result = mysqli_query($connection, 'create table db.logins (username varchar(255), password varchar(255), email text, loggedIn boolean, loginIP varchar(255), sessionID text);');
 	if (!$result)
@@ -41,7 +42,12 @@
 	  echo "created login table\n";
 
 
-	//mysqli_query($connection, 'create database groupMemberDB;');
+	/*
+	Create multiple entries if a user is a member of multiple groups.
+	
+	username and groupname are the user and the group they are a member of.
+	admin is whether a user has admin rights over a group.
+	*/
 	$result = mysqli_query($connection, 'create table db.groupMembers (username varchar(255), groupname varchar(255), admin boolean);');
   if (!$result)
   {
@@ -51,7 +57,15 @@
   else
     echo "created groupMembers table\n";
 
-	//mysqli_query($connection, 'create database fileDB;');
+	/*
+	Store files for each group.
+	
+	username is the OP.
+	groupname is the group that can see the file.
+	filename is the name of the file.
+	postDateTime is the date & time of upload.
+	file blob is the file itself.
+	*/
 	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, file longblob);');
   if (!$result)
   {
@@ -61,7 +75,10 @@
   else
     echo "created files table\n";
 
-	//mysqli_query($connection, 'create database eventDB;');
+	/*
+	Store each group's events in db.events
+	
+	*/
 	$result = mysqli_query($connection, "create table db.events (username varchar(255), 
 	eventName varchar(255), 
 	description text, 
@@ -76,7 +93,11 @@
   else
     echo "created events table\n";
   
-	//mysqli_query($connection, 'create database calendarDB;');
+	/*
+	Store each user's calendar in db.calendar
+	Each user's calendar has an entry for every calendar event.
+
+	*/
 	$result = mysqli_query($connection, "create table db.calendar (eventName varchar(255), 
 	groupName varchar(255), 
 	description text,
@@ -91,35 +112,7 @@
   else 
     echo "created calendar table\n";
 
-  //mysqli_query($connection, 'insert into login (user, pw, loggedIn, loginIP) in loginDB values ('root', 'toor', 'true', '127.0.0.1'); ');
-	//echo "loginDB insert query completed";
-/*	
-	$result = mysqli_query($connection, 'SELECT * FROM group1 in groupMembersDB;');
-  echo "loginDB select query completed\n";
-
-	while ($row = mysqli_fetch_array($result) )
-	{ 
-	echo( '<p>' . $row['user'] . ' ' . $row['logged_in'] . '</p>');
-	}
-*/
-/*
-	if(!$connection) //mysqli_connect_errno() )
-	{
-		echo "ERR: could not connect to MySQL: " . mysqli_connect_error() . "\n";
-	}
-	else
-	{
-		echo "Connection Established $connection\n";
-	}
-*/
 	echo "Database setup completed\n";
 
-//	return $connection;
-//}
-
-//echo "sql connection test \n";
-//connect();
-
-//$result = mysqli_query
 ?>
 
