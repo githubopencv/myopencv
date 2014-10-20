@@ -28,6 +28,9 @@
 	mysqli_query($con, 'drop database calendarDB;');
 	echo "dropped calendarDB\n";
 
+  mysqli_query($con, 'drop database db;');
+	echo "dropped calendarDB\n";
+
 	echo "Databases nuked\n";
 
 ?>
