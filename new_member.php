@@ -15,7 +15,7 @@ padding:5px;
 <center>
 <?php
 
-  $connection = new mysqli('localhost','root','mysql','loginDB');
+  $connection = new mysqli('localhost','root','mysql','db');
   if(!$connection)
   {
       echo('<p> Unable to connect. </p>');
@@ -25,7 +25,7 @@ padding:5px;
   $Username = $_POST['username'];
   $Password = $_POST['password'];
   $Email = $_POST['email'];
-  $result = mysqli_query($connection,"INSERT INTO logins (username, password, email, loggedIn) VALUES ('$Username', '$Password', '$Email', '1')");
+  $result = mysqli_query($connection,"INSERT INTO db.logins (username, password, email, loggedIn) VALUES ('$Username', '$Password', '$Email', '1')");
   
   //print errors
   if (!$result)
