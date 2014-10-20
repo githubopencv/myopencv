@@ -29,12 +29,16 @@ padding:5px;
     //ensure date and time are configured correctly
     date_default_timezone_set('America/Los_Angeles');
     
-    $tmpName = $_FILE['uploadFile']['tmpname'];
-    $f = fopen($tmpName, 'r');
-    $fileContent = fread($f, filesize($tmpName));
-    $fileContent = addslashes($fileContent); //escape special chars in file if present
-    $fileName = addslashes($tmpName); //escape special chars in file name if present
+    $tmpName = $_FILES['uploadFile']['tmpname'];
+    $f = fopen($tmpName, 'r') or die ("cannot open file");
+    $fileContent = fread($f, filesize($tmpName)) or die ("cannot read file");
+    $fileContent = addslashes($fileContent) or die ("cannot sanitize content"); //escape special chars in file if present
+    $fileName = addslashes($_FILES['uploadFile']['name']) or die ("cannot sanitize file name <br>"); //escape special chars in file name if present
     fclose($f);
+    
+    print_r($_FILES);
+    
+    echo "<br>". $_FILES['uploadFile']['name'] . "<br>";
     
     //checks should be run to ensure these are valid names,
     //and that this isn't a duplicate database entry
@@ -44,7 +48,7 @@ padding:5px;
     //$fileName = $_FILE['uploadFile']['name'];
     //$file = $_FILE['uploadFile'];
     
-    echo("Uploading " . $fileName);
+    echo"Uploading " . $fileName . "<br>";
     
     $result = mysqli_query($connection, "INSERT INTO db.files (username, groupname, filename, postDateTime, file) values ('$username', '$groupname', '$filename', '$postDateTime', '$fileContent' );");
   
