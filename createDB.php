@@ -15,7 +15,7 @@
 	mysqli_query($con, 'use mysql;');
 	
 	mysqli_query($con, 'create database loginDB;');
-	mysqli_query($con, 'create table loginDB.logins (username varchar(255), password varchar(255), email text, loggedIn boolean, loginIP varchar(255));');
+	mysqli_query($con, 'create table loginDB.logins (username varchar(255), password varchar(255), email text, loggedIn boolean, loginIP varchar(255), sessionID text);');
 	
 	echo "created loginDB\n";
 
@@ -24,7 +24,7 @@
   echo "created groupMembersDB\n";
 
 	mysqli_query($con, 'create database fileDB;');
-	mysqli_query($con, 'create table filesDB.group1 (username varchar(255), post_time time, post_date date, file mediumblob);');
+	mysqli_query($con, 'create table filesDB.group1 (username varchar(255), filename text, post_time time, post_date date, file mediumblob);');
   echo "created filesDB\n";
 
 	mysqli_query($con, 'create database eventDB;');
