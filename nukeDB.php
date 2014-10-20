@@ -29,7 +29,7 @@
 	echo "dropped calendarDB\n";
 
   mysqli_query($con, 'drop database db;');
-	echo "dropped calendarDB\n";
+	echo "dropped db\n";
 
 	echo "Databases nuked\n";
 
