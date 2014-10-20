@@ -20,15 +20,15 @@
 	echo "created loginDB\n";
 
 	mysqli_query($con, 'create database groupMemberDB;');
-	mysqli_query($con, 'create table groupMembersDB.group1 (username varchar(255), admin boolean);');
+	mysqli_query($con, 'create table groupMemberDB.group1 (username varchar(255), admin boolean);');
   echo "created groupMembersDB\n";
 
 	mysqli_query($con, 'create database fileDB;');
-	mysqli_query($con, 'create table filesDB.group1 (username varchar(255), filename text, post_time time, post_date date, file mediumblob);');
+	mysqli_query($con, 'create table fileDB.group1 (username varchar(255), filename text, postDateTime datetime, file mediumblob);');
   echo "created filesDB\n";
 
 	mysqli_query($con, 'create database eventDB;');
-	mysqli_query($con, 'create table eventsDB.group1 (username varchar(255), eventname varchar(255), description text, timeStart time, timeStop time, dateStart date, dateStop date, recurrence set);');
+	mysqli_query($con, 'create table eventDB.group1 (username varchar(255), eventname varchar(255), description text, timeStart time, timeStop time, dateStart date, dateStop date, recurrence set);');
   echo "created eventsDB\n";
   
 	mysqli_query($con, 'create database calendarDB;');
