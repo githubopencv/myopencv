@@ -15,7 +15,7 @@
 	mysqli_query($con, 'use mysql;');
 	
 	mysqli_query($con, 'create database loginDB;');
-	mysqli_query($con, 'create table loginDB.logins (username varchar(255), pw varchar(255), email text, loggedIn boolean, loginIP varchar(255));');
+	mysqli_query($con, 'create table loginDB.logins (username varchar(255), password varchar(255), email text, loggedIn boolean, loginIP varchar(255));');
 	
 	echo "created loginDB\n";
 

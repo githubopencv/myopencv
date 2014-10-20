@@ -15,7 +15,7 @@ padding:5px;
 <center>
 <?php
 
-  $connection = new mysqli('localhost','root','Munchy1*','group_management');
+  $connection = new mysqli('localhost','root','mysql','loginDB');
   if(!$connection)
   {
       echo('<p> Unable to connect. </p>');
@@ -25,15 +25,23 @@ padding:5px;
   $Username = $_POST['username'];
   $Password = $_POST['password'];
   $Email = $_POST['email'];
-  mysqli_query($connection,"INSERT INTO users SET Username = '$Username', Password = '$Password', Email = '$Email'");
+  $result = mysqli_query($connection,"INSERT INTO logins (username, password, email, loggedIn) VALUES ('$Username', '$Password', '$Email', '1')");
   
-  $result = mysqli_query($connection,'SELECT * FROM users');
+  //print errors
+  if (!$result)
+  {
+    $err = mysqli_error($connection);
+    echo($err);
+  }
+    
+  $result = mysqli_query($connection,'SELECT * FROM logins');
   
   while($row = mysqli_fetch_array($result))
   {
-      echo('<p>' . $row['Username'] . ' ' . $row['Password'] . ' ' . $row['Email'] . '</p>');
+      echo('<p>' . $row['username'] . ' ' . $row['password'] . ' ' . $row['email'] . '</p>');
   }
 
+  mysqli_close($connection);
 ?>
   <a href="http://localhost/grouphomepage.html">Go to Group Home page</a>
 </center>
