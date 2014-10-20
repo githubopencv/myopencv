@@ -36,8 +36,24 @@ padding:5px;
     $fileName = $_FILE['uploadFile']['name'];
     $file = $_FILE['uploadFile'];
     
-    $result = mysqli_query($connection, "INSERT INTO db.files (username, groupname, filename, postDateTime, file) values ('$username', '$groupname', '$filename', '$postDateTime', '$file', );");
+    echo("Uploading " . $fileName);
     
+    $result = mysqli_query($connection, "INSERT INTO db.files (username, groupname, filename, postDateTime, file) values ('$username', '$groupname', '$filename', '$postDateTime', '$file' );");
+  
+    //print upload errors
+    if (!$result)
+    {
+      $err = mysqli_error($connection);
+      echo($err);
+    }  
+    
+    //show uploaded files for debug
+    $result = mysqli_query($connection,'SELECT * FROM files');
+    
+    while($row = mysqli_fetch_array($result))
+    {
+        echo('<p>' . $row['username'] . ' ' . $row['groupname'] . ' ' . $row['postDateTime'] . ' ' . $row['filename'] . '</p>');
+    }
   }
 
 ?>
