@@ -29,22 +29,32 @@ padding:5px;
     //ensure date and time are configured correctly
     date_default_timezone_set('America/Los_Angeles');
     
+    $username = "defaultUser";
+    $groupname = "defaultGroup";
+    $postDateTime = date('Y-m-d H:i:s'); //mysql's date format 
+    
     $tmpName = $_FILES['uploadFile']['tmpname'];
+    $hashName = sha1_file($tmpName);
+    echo $tmpName . " " . $hashName . "<br>";
+    
+    if (!move_uploaded_file ($tmpName, $hashName) )
+      {
+        echo "Could not move uploaded file.<br>"
+      } 
+    /*
     $f = fopen($tmpName, 'r') or die ("cannot open file");
     $fileContent = fread($f, filesize($tmpName)) or die ("cannot read file");
     $fileContent = addslashes($fileContent) or die ("cannot sanitize content"); //escape special chars in file if present
     $fileName = addslashes($_FILES['uploadFile']['name']) or die ("cannot sanitize file name <br>"); //escape special chars in file name if present
     fclose($f);
-    
+    */
     print_r($_FILES);
     
     echo "<br>". $_FILES['uploadFile']['name'] . "<br>";
     
     //checks should be run to ensure these are valid names,
     //and that this isn't a duplicate database entry
-    $username = "defaultUser";
-    $groupname = "defaultGroup";
-    $postDateTime = date('Y-m-d H:i:s'); //mysql's date format 
+    
     //$fileName = $_FILE['uploadFile']['name'];
     //$file = $_FILE['uploadFile'];
     
