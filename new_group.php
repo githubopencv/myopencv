@@ -50,7 +50,7 @@ padding:5px;
   
   while($row = mysqli_fetch_array($result))
   {
-      echo('<p>' . $row['username'] . ' ' . $row['groupname'] . ' ' . $row['admin'] . '</p>');
+      echo('<p>' . $row['username'] . '  ' . $row['groupname'] . '  ' . $row['admin'] . '</p>');
   }
 
   mysqli_close($connection);
