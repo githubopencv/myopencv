@@ -26,6 +26,9 @@ padding:5px;
   else //if ( isset($_POST['uploadFile']) && $_FILES['uploadFile']['size'] > 0)
   {
     
+    print_r($_FILES);
+    echo "Filename " . $_FILES['uploadFile']['name']
+
     //ensure date and time are configured correctly
     date_default_timezone_set('America/Los_Angeles');
     
@@ -39,7 +42,7 @@ padding:5px;
     
     if (!move_uploaded_file ($tmpName, $hashName) )
       {
-        echo "Could not move uploaded file.<br>"
+        echo "Could not move uploaded file.<br>";
       } 
     /*
     $f = fopen($tmpName, 'r') or die ("cannot open file");
@@ -50,7 +53,6 @@ padding:5px;
     */
     print_r($_FILES);
     
-    echo "<br>". $_FILES['uploadFile']['name'] . "<br>";
     
     //checks should be run to ensure these are valid names,
     //and that this isn't a duplicate database entry
