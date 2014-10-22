@@ -36,7 +36,17 @@ padding:5px;
     echo ('<p> Invalid Admin User or Group Name </p>');
     exit();
   }
-      
+  
+  $result = mysqli_query($connection,'SELECT DISTINCT groupname FROM groupMembers');
+  while($row = mysqli_fetch_array($result))
+  {
+      if ($row['groupname'] == $groupname)
+      {
+        echo('<p>' . 'Group with name ' . $row['groupname'] . ' already exists' '</p>');
+        exit();
+      }
+  }
+  
   $result = mysqli_query($connection,"INSERT INTO db.groupMembers (username, groupname, admin) VALUES ('$Username', '$groupname', '1');");
   
   //print errors
