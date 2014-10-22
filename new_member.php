@@ -10,7 +10,7 @@ padding:5px;
 </style>
 <body>
 <header>
-<h2>Welcome to the Group!</h2>
+<h2>Welcome!</h2>
 </header>
 <center>
 <?php
@@ -34,7 +34,7 @@ padding:5px;
     echo($err);
   }
     
-  $result = mysqli_query($connection,'SELECT * FROM logins');
+  $result = mysqli_query($connection,'SELECT DISTINCT groupname FROM groupMembers');
   
   while($row = mysqli_fetch_array($result))
   {
@@ -44,6 +44,8 @@ padding:5px;
   mysqli_close($connection);
 ?>
   <a href="http://localhost/grouphomepage.html">Go to Group Home page</a>
+  <a href="http://localhost/new_group.html">Create a group</a>
+
 </center>
 </body>
 </html>
