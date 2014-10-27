@@ -37,18 +37,16 @@ padding:5px;
     exit();
   }
   
-  //Fail if group already exists
   $result = mysqli_query($connection,'SELECT DISTINCT groupname FROM groupMembers');
   while($row = mysqli_fetch_array($result))
   {
       if ($row['groupname'] == $groupname)
       {
-        echo( '<p>' . 'Group with name ' . '<b>' .  $row['groupname'] . '</b>' . ' already exists' . '</p>' );
+        echo('<p>' . 'Group with name ' . $row['groupname'] . ' already exists' '</p>');
         exit();
       }
   }
-
-  //create new group in sql
+  
   $result = mysqli_query($connection,"INSERT INTO db.groupMembers (username, groupname, admin) VALUES ('$Username', '$groupname', '1');");
   
   //print errors
@@ -58,11 +56,11 @@ padding:5px;
     echo($err);
   }
     
-  $result = mysqli_query($connection,'SELECT DISTINCT * FROM groupMembers WHERE admin=1;');
+  $result = mysqli_query($connection,'SELECT DISTINCT * FROM groupMembers');
   
   while($row = mysqli_fetch_array($result))
   {
-      echo('<p> <b>Admin User:</b> ' . $row['username'] . '  <b>Group name:</b>' . $row['groupname']  . '</p>');
+      echo('<p>' . $row['username'] . '  ' . $row['groupname'] . '  ' . $row['admin'] . '</p>');
   }
 
   mysqli_close($connection);
