@@ -15,6 +15,50 @@ padding:5px;
 <center>
 <?php
 
+session_start();
+
+if(!isset($_SESSION['user_id']))
+{
+	$message = 'You must be logged in to access this page!';
+  exit();
+}
+else
+{
+	$db_username = 'root';
+	$db_password = '';
+	$db_info = 'mysql:dbname=user_login;host=127.0.0.1';
+	
+	try
+	{
+		
+		$dbhandle = new PDO($db_info, $db_username, $db_password);
+		$dbhandle->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		
+		$insert_user = $dbhandle->prepare("SELECT username FROM usernametable
+        WHERE usernameid = :usernameid");
+
+		$insert_user->bindParam(':usernameid', $_SESSION['user_id'], PDO::PARAM_INT);
+
+		$insert_user->execute();
+		
+		$username_check = $insert_user->fetchColumn();
+		
+		if($username_check == false)
+		{
+			$message = 'Access Error!';
+		}
+		else
+		{
+			$message = 'Welcome '.$username_check;
+		}
+	}
+	catch(Exception $excep)
+	{
+		$message = 'Please contact an admin.';
+		//$message = $excep->getMessage();
+	}
+}
+
   $connection = new mysqli('localhost','root','mysql','db');
   if(!$connection)
   {
