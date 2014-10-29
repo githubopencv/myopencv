@@ -8,22 +8,24 @@
   Push any changes to github if this setup doesn't do everything you need.
   That way, everyone stays on the same page; just remember to git pull & merge often. 
   */
+  
+  $db = "jvillanueva";
 
 	echo "Database setup commenced\n";
 
-	$connection = new mysqli('127.0.0.1', 'root');  
-	mysqli_query($connection, 'use mysql;');
+	$connection = new mysqli("db.ecst.csuchico.edu", "jvillanueva", "H5msvMGK", "jvillanueva", "5551"); //using db, not $db, on purpose  
+	mysqli_query($connection, "use $db;");
 	
-	$result = mysqli_query($connection, 'create database db;');
+	$result = mysqli_query($connection, 'create database $db;');
 	if (!$result)
   {
     $err = mysqli_error($connection);
     echo($err . "\n");
   }
   else
-    echo "created database db\n";
+    echo "created database $db\n";
 	
-		/*
+	/*
 	every user's login data is stored in db.login
 	
 	username, password, and email are self-explanitory.
@@ -32,7 +34,7 @@
 	sessionID is checking that a user's current login is valid.
 	*/
 	
-	$result = mysqli_query($connection, 'create table db.logins (username varchar(255), password varchar(255), email text, loggedIn boolean, loginIP varchar(255), sessionID text);');
+	$result = mysqli_query($connection, "create table $db.logins (username varchar(255), password varchar(255), email text, loggedIn boolean, loginIP varchar(255), sessionID text);");
 	if (!$result)
   {
     $err = mysqli_error($connection);
@@ -48,7 +50,7 @@
 	username and groupname are the user and the group they are a member of.
 	admin is whether a user has admin rights over a group.
 	*/
-	$result = mysqli_query($connection, 'create table db.groupMembers (username varchar(255), groupname varchar(255), admin boolean);');
+	$result = mysqli_query($connection, "create table $db.groupMembers (username varchar(255), groupname varchar(255), admin boolean);");
   if (!$result)
   {
     $err = mysqli_error($connection);
@@ -66,7 +68,7 @@
 	postDateTime is the date & time of upload.
 	file blob is the file itself.
 	*/
-	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, file longblob);');
+	$result = mysqli_query($connection, "create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime);");
   if (!$result)
   {
     $err = mysqli_error($connection);
@@ -79,7 +81,7 @@
 	Store each group's events in db.events
 	
 	*/
-	$result = mysqli_query($connection, "create table db.events (username varchar(255), 
+	$result = mysqli_query($connection, "create table $db.events (username varchar(255), 
 	eventName varchar(255), 
 	description text, 
 	dateStart datetime, 
@@ -98,7 +100,7 @@
 	Each user's calendar has an entry for every calendar event.
 
 	*/
-	$result = mysqli_query($connection, "create table db.calendar (eventName varchar(255), 
+	$result = mysqli_query($connection, "create table $db.calendar (eventName varchar(255), 
 	groupName varchar(255), 
 	description text,
 	dateStart datetime, 
