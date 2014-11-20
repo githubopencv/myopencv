@@ -1,5 +1,5 @@
-<!--James Villanueva
-CSCI 430 - Index Page
+<!--Savpreet Singh
+CSCI 430 - Login Page
 Fall 2014
 -->
 <?php
@@ -73,7 +73,7 @@ else
 		else
 		{
 			$_SESSION['user_id'] = $user_id;
-			$logged_in = true;
+			$_SESSION['logged_in'] = true;
 			$message = 'You are now logged in';
 		}
 	}
@@ -90,38 +90,38 @@ else
 <body id="body_color">
 <p><?php echo $message; ?>
 <?php
-if(isset($logged_in))
+if(isset($_SESSION['logged_in']))
 {
-  echo "<form action='log_out.php' target='_self' action='post'>";
-  echo "<input id='button' type='submit' name='submit' value='Log Out'>";
-  echo "</form>";
-  echo "<br>";
-  echo "<form action='change_password.php' target='_self' action='post'>";
-  echo "<input id='button' type='submit' name='submit' value='Change Password'>";
-  echo "</form>";
+echo "<form action='log_out.php' target='_self' action='post'>";
+echo "<input id='button' type='submit' name='submit' value='Log Out'>";
+echo "</form>";
+echo "<br>";
+echo "<form action='change_password.php' target='_self' action='post'>";
+echo "<input id='button' type='submit' name='submit' value='Change Password'>";
+echo "</form>";
 }
 else
 {
-  echo "<form action='index.php' method='POST'>";
-  echo "<br>";
-  echo "Username: <input type='text' name='username' value='' maxlength='20'><br>";
-  echo "<br>";
-  echo "Password: <input type='password' name='password' value='' maxlength='20'><br>";
-  echo "<br>";
-  echo "<input id='button' type='submit' name='submit' value='Sign In'>";
-  echo "</form>";
-  echo "<br>";
-  echo "<a href='forgot_password.php'> Forgot Password? </a>";
-  echo "<br>";
-  echo "</fieldset>";
-  echo "</div>";
-  echo "</center>";
-  echo "<center>";
-  echo "<h4>If you need to register, please click here:</h4>";
-  echo "<form action='adduser.php' target='_self' action='post'>";
-  echo "<input id='button' type='submit' name='submit' value='Register'>";
-  echo "</form>";	
-  echo "</center>";
+echo "<form action='index.php' method='POST'>";
+echo "<br>";
+echo "Username: <input type='text' name='username' value='' maxlength='20'><br>";
+echo "<br>";
+echo "Password: <input type='password' name='password' value='' maxlength='20'><br>";
+echo "<br>";
+echo "<input id='button' type='submit' name='submit' value='Sign In'>";
+echo "</form>";
+echo "<br>";
+echo "<a href='forgot_password.php'> Forgot Password? </a>";
+echo "<br>";
+echo "</fieldset>";
+echo "</div>";
+echo "</center>";
+echo "<center>";
+echo "<h4>If you need to register, please click here:</h4>";
+echo "<form action='adduser.php' target='_self' action='post'>";
+echo "<input id='button' type='submit' name='submit' value='Register'>";
+echo "</form>";	
+echo "</center>";
 }
 ?>
 </center>
