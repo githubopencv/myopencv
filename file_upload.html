@@ -24,13 +24,11 @@
 	<center>
 	<h>Choose file to upload</h>
 	<br><br>
-	<form action="file_upload.php" method="post"
-	enctype="multipart/form-data">
-	<label for="file">Filename:</label>
-	<input type="file" name="uploadFile" id="uploadFile"><br>
-	<br>
-	<input type="Submit" name="Submit" value="Submit">
-	</form>
+	<form action="upload.php" method="post" enctype="multipart/form-data">
+            Select file to upload:
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Upload File" name="submit">
+        </form>
 	</center>
 	
 	<br><br><br><br>
