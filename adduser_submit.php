@@ -14,6 +14,7 @@
 	$password = sha1($password);
 
 	$connection = new mysqli('db.ecst.csuchico.edu','jvillanueva','H5msvMGK','jvillanueva','5551');
+		
 
 	$message = ('-');
 	$count = 0;

@@ -9,7 +9,7 @@ CREATE TABLE UserNameTable
 (
 	UserNameID int(9) NOT NULL auto_increment,
 	UserName VARCHAR(40) NOT NULL,
-	pass VARCHAR(40) NOT NULL,
+	Password VARCHAR(40) NOT NULL,
 	email VARCHAR(80) NOT NULL,
 	PRIMARY KEY(UserNameID),
 	UNIQUE KEY UserNameID(UserNameID),
