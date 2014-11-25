@@ -14,73 +14,55 @@ padding:5px;
 </header>
 <center>
 <?php
+$target_dir = "uploads/";
+//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
-  //there should be a non-root user that oversees all file DB operations
-  $connection = new mysqli('localhost','root','mysql','db');
-  
-  if (!$connection) //print error and quit if no connection
-  {
-    echo('<p> Unable to connect to database. </p>');
-	  exit();
-  }
-  else //if ( isset($_POST['uploadFile']) && $_FILES['uploadFile']['size'] > 0)
-  {
-    
-    print_r($_FILES);
-    echo "Filename " . $_FILES['uploadFile']['name']
+//Sanitize inputs
+if (isset($_POST["submit"])) 
+{
+    $safe_name = addslashes ($_FILES["fileToUploada"]["name"]);
+    $target_file = $target_dir . basename($safe_name);
+}
+else
+{
+        die("submission failed");
+}
 
-    //ensure date and time are configured correctly
-    date_default_timezone_set('America/Los_Angeles');
-    
-    $username = "defaultUser";
-    $groupname = "defaultGroup";
-    $postDateTime = date('Y-m-d H:i:s'); //mysql's date format 
-    
-    $tmpName = $_FILES['uploadFile']['tmpname'];
-    $hashName = sha1_file($tmpName);
-    echo $tmpName . " " . $hashName . "<br>";
-    
-    if (!move_uploaded_file ($tmpName, $hashName) )
-      {
-        echo "Could not move uploaded file.<br>";
-      } 
-    /*
-    $f = fopen($tmpName, 'r') or die ("cannot open file");
-    $fileContent = fread($f, filesize($tmpName)) or die ("cannot read file");
-    $fileContent = addslashes($fileContent) or die ("cannot sanitize content"); //escape special chars in file if present
-    $fileName = addslashes($_FILES['uploadFile']['name']) or die ("cannot sanitize file name <br>"); //escape special chars in file name if present
-    fclose($f);
-    */
-    print_r($_FILES);
-    
-    
-    //checks should be run to ensure these are valid names,
-    //and that this isn't a duplicate database entry
-    
-    //$fileName = $_FILE['uploadFile']['name'];
-    //$file = $_FILE['uploadFile'];
-    
-    echo"Uploading " . $fileName . "<br>";
-    
-    $result = mysqli_query($connection, "INSERT INTO db.files (username, groupname, filename, postDateTime, file) values ('$username', '$groupname', '$filename', '$postDateTime', '$fileContent' );");
-  
-    //print upload errors
-    if (!$result)
-    {
-      $err = mysqli_error($connection);
-      echo($err);
-    }  
-    
-    //show uploaded files for debug
-    $result = mysqli_query($connection,'SELECT * FROM files');
-    
-    while($row = mysqli_fetch_array($result))
-    {
-        echo('<p>' . $row['username'] . ' ' . $row['groupname'] . ' ' . $row['postDateTime'] . ' ' . $row['filename'] . '</p>');
-    }
-  }
+$connection = new mysqli('localhost','root','mysql','db');
+if(!$connection)
+{
+        die('<p> Unable to connect. </p>');
+}
 
-?>
+// Check if file already exists
+if (file_exists($target_file)) 
+{
+        die ("Sorry, file already exists.<br>");
+        $allowUpload = 0;
+}
+else
+{
+        $allowUpload = 1;
+}
+
+//get file size
+$filesize = $_FILES["fileToUpload"]["size"];
+echo "File size " . $filesize . "<br>";
+
+//store file
+if ($allowUpload)
+{
+ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+ {
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+ } 
+ else 
+ {
+        echo "Sorry, there was an error uploading your file.";
+ }
+}
+
+?> 
 
 <a href="http://localhost/grouphomepage.html">Go to Group Home page</a>
 </center>
