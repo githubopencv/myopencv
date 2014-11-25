@@ -22,7 +22,14 @@ if (isset($_POST["submit"]))
 {
     $safe_name = addslashes ($_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($safe_name);
-    $hash_name = md5_file($_FILES["fileToUpload"]["name"]);
+    
+    $hash_name = sha1_file( $_FILES["fileToUpload"]["tmp_name"] );
+    $hash_file = $target_dir . $hash_name;
+    
+    echo "safe name " . $safe_name . "<br>";
+    echo "file " . $target_file . "<br>";
+    echo "hash name " . $hash_name . "<br>";
+    echo "hash file: " . $hash_file . "<br>";
 }
 else
 {
@@ -53,13 +60,14 @@ echo "File size " . $filesize . "<br>";
 //store file
 if ($allowUpload)
 {
- if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
+ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $hash_file)) 
  {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
  } 
  else 
  {
-        echo "Sorry, there was an error uploading your file.";
+        echo "Sorry, there was an error uploading your file. <br>";
+        
  }
 }
 
