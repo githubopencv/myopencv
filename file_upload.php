@@ -20,7 +20,7 @@ $target_dir = "uploads/";
 //Sanitize inputs
 if (isset($_POST["submit"])) 
 {
-    $safe_name = addslashes ($_FILES["fileToUploada"]["name"]);
+    $safe_name = addslashes ($_FILES["fileToUpload"]["name"]);
     $target_file = $target_dir . basename($safe_name);
 }
 else
