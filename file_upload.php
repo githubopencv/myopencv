@@ -25,7 +25,7 @@ if (isset($_POST["submit"]))
 }
 else
 {
-        die("submission failed");
+        die("submission failed"); 
 }
 
 $connection = new mysqli('localhost','root','mysql','db');
