@@ -20,15 +20,15 @@ $target_dir = "uploads/";
 //Sanitize inputs
 if (isset($_POST["submit"])) 
 {
-    $safe_name = addslashes ($_FILES["fileToUpload"]["name"]);
-    $dest = $target_dir . basename($safe_name);
+    $safeName = addslashes ($_FILES["fileToUpload"]["name"]);
+    $dest = $target_dir . basename($safeName);
     
-    $hash_name = sha1_file( $_FILES["fileToUpload"]["tmp_name"] );
-    $hash_dest = $target_dir . $hash_name;
+    $hash = sha1_file( $_FILES["fileToUpload"]["tmp_name"] );
+    $hash_dest = $target_dir . $hash;
     
-    echo "safe name " . $safe_name . "<br>";
+    echo "safe name " . $safeName . "<br>";
     echo "file " . $dest . "<br>";
-    echo "hash name " . $hash_name . "<br>";
+    echo "hash name " . $hash . "<br>";
     echo "hash file: " . $hash_dest . "<br>";
 }
 else
@@ -64,10 +64,10 @@ if ($allowUpload)
  if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $hash_dest)) 
  {
         date_default_timezone_set("America/Los_Angeles");
-        $dateTime = date( "Y-m-d H:i:s", date()); //format is correct?
+        $dateTime = date( "Y-m-d H:i:s", time()); //format is correct?
         echo "date: " . $dateTime . "<br>";
         
-        mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('herp', 'derp', '$safename', '$dateTime', '$hash_name');") or die(mysqli_error($connection));
+        mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('herp', 'derp', '$safeName', '$dateTime', '$hash');") or die(mysqli_error($connection));
         
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
  } 
