@@ -11,8 +11,9 @@
 
 	echo "Database setup commenced\n";
 
-	$connection = new mysqli('db.ecst.csuchico.edu', 'jvillanueva, 'H5msvMGK', 'jvillanueva', '5551');  
-	mysqli_query($connection, 'use mysql;');
+//	$connection = new mysqli('db.ecst.csuchico.edu', 'jvillanueva, 'H5msvMGK', 'jvillanueva', '5551');  
+        $connection = new mysqli('localhost','root','mysql');
+	//mysqli_query($connection, 'use mysql;');
 	
 	$result = mysqli_query($connection, 'create database db;');
 	if (!$result)
@@ -66,7 +67,7 @@
 	postDateTime is the date & time of upload.
 	file blob is the file itself.
 	*/
-	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, file longblob);');
+	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, hash text);');
   if (!$result)
   {
     $err = mysqli_error($connection);
