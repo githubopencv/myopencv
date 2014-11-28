@@ -14,22 +14,29 @@ padding:5px;
 </header>
 <center>
 <?php
-$target_dir = "uploads/";
-//$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+//turn on debug messages
+$debug = true;
+
+$targetDir = "uploads/";
+//$target_file = $targetDir . basename($_FILES["fileToUpload"]["name"]);
 
 //Sanitize inputs
 if (isset($_POST["submit"])) 
 {
     $safeName = addslashes ($_FILES["fileToUpload"]["name"]);
-    $dest = $target_dir . basename($safeName);
+    $dest = $targetDir . basename($safeName);
     
     $hash = sha1_file( $_FILES["fileToUpload"]["tmp_name"] );
-    $hash_dest = $target_dir . $hash;
+    $hashDest = $targetDir . $hash;
     
-    echo "safe name " . $safeName . "<br>";
-    echo "file " . $dest . "<br>";
-    echo "hash name " . $hash . "<br>";
-    echo "hash file: " . $hash_dest . "<br>";
+    //debug outputs
+    if ( !empty($debug))
+    {
+            echo "safe name " . $safeName . "<br>";
+            echo "file " . $dest . "<br>";
+            echo "hash name " . $hash . "<br>";
+            echo "hash file: " . $hashDest . "<br>";
+    } 
 }
 else
 {
@@ -40,11 +47,12 @@ else
 $connection = new mysqli('localhost','root','mysql','db');
 if(!$connection)
 {
-        die('<p> Unable to connect. </p>');
+        die('<p> Unable to connect, database error. </p>');
 }
 
 // Check if file already exists
-if (file_exists($target_file)) 
+//something a bit more sophisticated should to be done to prevent name/hash collisions
+if (file_exists($hashDest)) 
 {
         die ("Sorry, file already exists.<br>");
         $allowUpload = 0;
@@ -54,22 +62,33 @@ else
         $allowUpload = 1;
 }
 
-//get file size
-$filesize = $_FILES["fileToUpload"]["size"];
-echo "File size " . $filesize . "<br>";
 
 //store file
 if ($allowUpload)
 {
- if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $hash_dest)) 
+ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $hashDest)) 
  {
+        //format for mysql DateTime type
         date_default_timezone_set("America/Los_Angeles");
-        $dateTime = date( "Y-m-d H:i:s", time()); //format is correct?
-        echo "date: " . $dateTime . "<br>";
+        $dateTime = date( "Y-m-d H:i:s", time());
         
-        mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('herp', 'derp', '$safeName', '$dateTime', '$hash');") or die(mysqli_error($connection));
+        //get file size
+        $filesize = $_FILES["fileToUpload"]["size"];
         
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        if( !empty($debug))
+        {
+                //query with error and debug outputs
+                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('herp', 'derp', '$safeName', '$dateTime', '$hash');") or die(mysqli_error($connection));
+                
+                echo "date: " . $dateTime . "<br>";
+                echo "File size " . $filesize . "<br>";
+                echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        }
+        else
+        {
+                //quiet query
+                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('herp', 'derp', '$safeName', '$dateTime', '$hash');");
+        }
  } 
  else 
  {

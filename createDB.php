@@ -67,7 +67,7 @@
 	postDateTime is the date & time of upload.
 	file blob is the file itself.
 	*/
-	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, hash text);');
+	$result = mysqli_query($connection, 'create table db.files (username varchar(255), groupname varchar(255), filename text, postDateTime datetime, filesize int, hash text);');
   if (!$result)
   {
     $err = mysqli_error($connection);
