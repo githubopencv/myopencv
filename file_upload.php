@@ -87,7 +87,7 @@ if ($allowUpload)
         else
         {
                 //quiet query
-                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('herp', 'derp', '$safeName', '$dateTime', '$hash');");
+                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('testUser', 'testGroup', '$safeName', '$dateTime', '$hash');");
         }
  } 
  else 
