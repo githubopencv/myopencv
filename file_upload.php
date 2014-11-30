@@ -54,7 +54,7 @@ if(!$connection)
 //something a bit more sophisticated should to be done to prevent name/hash collisions
 if (file_exists($hashDest)) 
 {
-        die ("Sorry, file already exists.<br>");
+        echo ("Sorry, file already exists.<br>");
         $allowUpload = 0;
 }
 else
