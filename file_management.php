@@ -59,6 +59,7 @@
         while ($row = mysqli_fetch_array($result) or die( mysqli_error($connection)) )
         {
                 $filename = $row['filename'];
+                $hash = $row['hash'];
                 
                 //start a new row
                 echo "<tr>";
@@ -69,8 +70,8 @@
                 echo "<td>" . $row['groupname'] . "</td>";
                 echo "<td>" . $row['postDateTime'] . "</td>";
                 echo "<td>" . $row['filesize'] . "</td>";
-                echo "<td>" . "<a href='file_download.php?filename=$filename'>download</a>" . "</td>";
-                echo "<td>" . "<a href='file_delete.php?filename=$filename'>delete</a>" . "</td>";
+                echo "<td>" . "<a href='file_download.php?hash=$hash&filename=$filename'>download</a>" . "</td>";
+                echo "<td>" . "<a href='file_delete.php?hash=$hash&filename=$filename'>delete</a>" . "</td>";
                 
                 //end a new row
                 echo "</tr>"; 

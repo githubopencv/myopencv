@@ -78,7 +78,7 @@ if ($allowUpload)
         if( !empty($debug))
         {
                 //query with error and debug outputs
-                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, filesize, hash) values ('herp', 'derp', '$safeName', '$dateTime', '$filesize','$hash');") or die(mysqli_error($connection));
+                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, filesize, hash) values ('testUser', 'testGroup', '$safeName', '$dateTime', '$filesize','$hash');") or die(mysqli_error($connection));
                 
                 echo "date: " . $dateTime . "<br>";
                 echo "File size " . $filesize . "<br>";
