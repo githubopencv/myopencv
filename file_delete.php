@@ -38,19 +38,27 @@
         $safehash = addslashes($safehash); //escape special chars
         $safefilename = strip_tags($filename);
         $safefilename = addslashes($safefilename);
+        $path = "uploads/" . $safehash;
         
-        //get a list of files in alphabetical order
-        $result = mysqli_query($connection, "delete from db.files where hash='$safehash'") or die( mysqli_error($connection) );
-        
-        if ($result) 
+        //remove file from filesystem
+        if( unlink($path) )
         {
-                echo "<center>Deleted file $safefilename</center>";
+                //remove file from db
+                $result = mysqli_query($connection, "delete from db.files where hash='$safehash'") or die( mysqli_error($connection) );
+                       
+                if ($result) 
+                {
+                        echo "<center>Deleted file $safefilename</center>";
+                }
+                else
+                {
+                        echo "<center>Error: could not delete file $safefilename</center>";
+                }
         }
         else
         {
                 echo "<center>Error: could not delete file $safefilename</center>";
         }
-        
         ?>
         
 <p><a href="http://localhost/grouphomepage.html">Go to Group Home page</a></p>
