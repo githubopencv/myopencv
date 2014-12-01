@@ -83,7 +83,7 @@ $html.= "<center>";
         {
                 //file doesn't exist
                 header("HTTP/1.0 404 Not Found");
-                $html.= "<center>File not in database</center>";
+                //$html.= "<center>File not in database</center>";
                 $html.= "<center>HTTP/1.0 404 Not Found</center>";
                 $fail = 1;
                 
@@ -134,7 +134,7 @@ $html.= "<center>";
                                         $html.= "<center>HTTP/1.1 416 Requested Range Not Satisfiable</center>";
                                         $fail = 1;
                                 }
-                        } //end if $_SERVER
+                        } //end if HTTP_RANGE
                         else
                         {
                                $range = '';

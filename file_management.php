@@ -51,8 +51,8 @@
         echo "<style> th {text-align:left;} </style>"; 
         echo "<table style='width:100%' id='file_management'>";
         echo "<tr><th>File</th>";
-        echo "<th>User</th>";
-        echo "<th>Group</th>";
+        //echo "<th>User</th>";
+        //echo "<th>Group</th>";
         echo "<th>Upload Date</th>";
         echo "<th>File Size</th></tr>";
         
@@ -66,8 +66,8 @@
                 
                 //row elements
                 echo "<td>" . $filename . "</td>";
-                echo "<td>" . $row['username'] . "</td>";
-                echo "<td>" . $row['groupname'] . "</td>";
+                //echo "<td>" . $row['username'] . "</td>";
+                //echo "<td>" . $row['groupname'] . "</td>";
                 echo "<td>" . $row['postDateTime'] . "</td>";
                 echo "<td>" . $row['filesize'] . "</td>";
                 echo "<td>" . "<a href='file_download.php?hash=$hash&filename=$filename'>download</a>" . "</td>";

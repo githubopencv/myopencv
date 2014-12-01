@@ -15,7 +15,7 @@ padding:5px;
 <center>
 <?php
 //turn on debug messages
-$debug = true;
+//$debug = true;
 
 $targetDir = "uploads/";
 //$target_file = $targetDir . basename($_FILES["fileToUpload"]["name"]);
@@ -88,11 +88,17 @@ if ($allowUpload)
         {
                 //quiet query
                 mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('testUser', 'testGroup', '$safeName', '$dateTime', '$hash');");
+                $fail = mysqli_error($connection);
+                
+                if( empty($fail) ) //$fail = "" if no errors
+                        echo "<center>File upload successful</center>";
+                else
+                        echo "<center>Sorry, there was an error uploading your file.</center>";
         }
  } 
  else 
  {
-        echo "Sorry, there was an error uploading your file. <br>";
+        echo "<center>Sorry, there was an error uploading your file.</center>";
         
  }
 }
