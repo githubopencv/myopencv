@@ -7,6 +7,8 @@
 ob_start();
 
 //this MUST be inside the php script, or it is impossible to send headers.
+//CANNOT used mixed PHP/HTML when php header() is used
+//need ob_start buffering so all html goes out at one time, or nothing works
 echo "<!DOCTYPE html>";
 echo "<html>";
 	echo "<style>";
@@ -39,6 +41,7 @@ echo "<center>";
         if( empty($_GET['hash']) or empty($_GET['filename']) or !empty($fail) )
         {  
                 header("HTTP/1.0 400 Bad Request");
+                echo "<center>HTTP/1.0 400 Bad Request</center>";
                 $fail = 1;
                 exit(); //must exit or buffering errors
         } //end if
@@ -53,7 +56,7 @@ echo "<center>";
         $safehash = addslashes($safehash); //escape special chars
         $safefilename = strip_tags($filename);
         $safefilename = addslashes($safefilename);
-        $path = "/var/www/html/uploads/" . $safehash;
+        
         
         //find file's name and hash in db, to ensure GET passed a real file
         $result = mysqli_query($connection, "select * from db.files where hash='$safehash' limit 1") or die( mysqli_error($connection) );
@@ -65,6 +68,7 @@ echo "<center>";
                 //organize file metadata
                 $downloadhash = $row['hash'];
                 $downloadfilename = $row['filename'];
+                $path = "/var/www/html/uploads/";
                 $downloadpath = $path . $downloadhash;
                 //$filesize = filesize($downloadpath); //throws "stat failed" error
                 $filesize = $row['filesize'];
@@ -77,14 +81,16 @@ echo "<center>";
         {
                 //file doesn't exist
                 header("HTTP/1.0 404 Not Found");
+                echo "<center>File not in database</center>";
+                echo "<center>HTTP/1.0 404 Not Found</center>";
                 $fail = 1;
                 exit();
         }
         
         //start download if file exists, else 404 error
-        if ( file_exists($downloadhash) and empty($fail) )
+        if ( file_exists($downloadpath) and empty($fail) )
         {
-                $file = fopen($downloadpath, "rb");
+                $file = fopen($downloadpath, "r");
                 
                 //prepare download if file opened successfully, else 500 error
                 if ($file)
@@ -123,6 +129,7 @@ echo "<center>";
                                 {
                                         $range = '';
                                         header("HTTP/1.1 416 Requested Range Not Satisfiable");
+                                        echo "<center>HTTP/1.1 416 Requested Range Not Satisfiable</center>";
                                         $fail = 1;
                                 }
                         } //end if $_SERVER
@@ -186,6 +193,7 @@ echo "<center>";
                 {
                         //cannot access file
                         header("HTTP/1.0 500 Internal Server Error");
+                        echo "<center>HTTP/1.0 500 Internal Server Error</center>";
                         $fail = 1;                
                 }
                 
@@ -194,13 +202,21 @@ echo "<center>";
         {
                 //file doesn't exist
                 header("HTTP/1.0 404 Not Found");
-                $fail = 1;
+                echo "<center>File $downloadpath</center>";
+                echo "<center>" . "search result " . file_exists($downloadpath) . "</center>";
+                echo "<center>Fail: $fail</center>";
+                echo "<center>File not in filesystem</center>";
+                echo "<center>HTTP/1.0 404 Not Found</center>";
+                //$fail = 1;
         }
         
+        /*
         //show warning if errors fall through
         if( !empty($fail) )
+        {
                 header("HTTP/1.0 500 Internal Server Error");
- 
+                echo "<center>HTTP/1.0 500 Internal Server Error</center>";
+        }*/
 echo "<p><a href='http://localhost/grouphomepage.html'>Go to Group Home page</a></p>";
 echo "<p><a href='http://localhost/file_management.php'>Return to File Management</a></p>";
 echo "</center>";
