@@ -6,24 +6,24 @@
 //start buffering, so headers go out all at once
 ob_start();
 
-//this MUST be inside the php script, or it is impossible to send headers.
+//this html MUST be inside the php script, or it is impossible to send headers.
 //CANNOT used mixed PHP/HTML when php header() is used
 //need ob_start buffering so all html goes out at one time, or nothing works
-echo "<!DOCTYPE html>";
-echo "<html>";
-	echo "<style>";
-		echo "header {";
-			echo "background-color:black;";
-			echo "color:white;";
-			echo "text-align:center;";
-			echo "padding:5px;";	 
-		echo "}";
-	echo "</style>";
-echo "<body>";
-echo "<center>";
-	echo "<header>";
-	echo "<h2>File Download</h2>";
-	echo "</header>";
+$html= "<!DOCTYPE html>";
+$html.= "<html>";
+	$html.= "<style>";
+		$html.= "header {";
+			$html.= "background-color:black;";
+			$html.= "color:white;";
+			$html.= "text-align:center;";
+			$html.= "padding:5px;";	 
+		$html.= "}";
+	$html.= "</style>";
+$html.= "<body>";
+$html.= "<center>";
+	$html.= "<header>";
+	$html.= "<h2>File Download</h2>";
+	$html.= "</header>";
 	
 
 	//hard code $_GET for debug purposes ONLY
@@ -33,7 +33,7 @@ echo "<center>";
         $connection = new mysqli('localhost','root','mysql','db');
         if(!$connection)
         {
-                echo('<p> Unable to connect. Database error. </p>');
+                $html.= ('<p> Unable to connect. Database error. </p>');
                 $fail = 1;
         }
            
@@ -41,9 +41,9 @@ echo "<center>";
         if( empty($_GET['hash']) or empty($_GET['filename']) or !empty($fail) )
         {  
                 header("HTTP/1.0 400 Bad Request");
-                echo "<center>HTTP/1.0 400 Bad Request</center>";
+                $html.= "<center>HTTP/1.0 400 Bad Request</center>";
                 $fail = 1;
-                exit(); //must exit or buffering errors
+                
         } //end if
         else
         {       
@@ -81,10 +81,10 @@ echo "<center>";
         {
                 //file doesn't exist
                 header("HTTP/1.0 404 Not Found");
-                echo "<center>File not in database</center>";
-                echo "<center>HTTP/1.0 404 Not Found</center>";
+                $html.= "<center>File not in database</center>";
+                $html.= "<center>HTTP/1.0 404 Not Found</center>";
                 $fail = 1;
-                exit();
+                
         }
         
         //start download if file exists, else 404 error
@@ -129,7 +129,7 @@ echo "<center>";
                                 {
                                         $range = '';
                                         header("HTTP/1.1 416 Requested Range Not Satisfiable");
-                                        echo "<center>HTTP/1.1 416 Requested Range Not Satisfiable</center>";
+                                        $html.= "<center>HTTP/1.1 416 Requested Range Not Satisfiable</center>";
                                         $fail = 1;
                                 }
                         } //end if $_SERVER
@@ -193,7 +193,7 @@ echo "<center>";
                 {
                         //cannot access file
                         header("HTTP/1.0 500 Internal Server Error");
-                        echo "<center>HTTP/1.0 500 Internal Server Error</center>";
+                        $html.= "<center>HTTP/1.0 500 Internal Server Error</center>";
                         $fail = 1;                
                 }
                 
@@ -202,11 +202,11 @@ echo "<center>";
         {
                 //file doesn't exist
                 header("HTTP/1.0 404 Not Found");
-                echo "<center>File $downloadpath</center>";
-                echo "<center>" . "search result " . file_exists($downloadpath) . "</center>";
-                echo "<center>Fail: $fail</center>";
-                echo "<center>File not in filesystem</center>";
-                echo "<center>HTTP/1.0 404 Not Found</center>";
+                $html.= "<center>File $downloadpath</center>";
+                $html.= "<center>" . "search result " . file_exists($downloadpath) . "</center>";
+                $html.= "<center>Fail: $fail</center>";
+                $html.= "<center>File not in filesystem</center>";
+                $html.= "<center>HTTP/1.0 404 Not Found</center>";
                 //$fail = 1;
         }
         
@@ -217,13 +217,14 @@ echo "<center>";
                 header("HTTP/1.0 500 Internal Server Error");
                 echo "<center>HTTP/1.0 500 Internal Server Error</center>";
         }*/
-echo "<p><a href='http://localhost/grouphomepage.html'>Go to Group Home page</a></p>";
-echo "<p><a href='http://localhost/file_management.php'>Return to File Management</a></p>";
-echo "</center>";
-echo "</body>";
-echo "</html>";
+$html.= "<p><a href='http://localhost/grouphomepage.html'>Go to Group Home page</a></p>";
+$html.= "<p><a href='http://localhost/file_management.php'>Return to File Management</a></p>";
+$html.= "</center>";
+$html.= "</body>";
+$html.= "</html>";
         
         //output buffer contents
+        echo $html;
         ob_end_flush();
 ?>
         
