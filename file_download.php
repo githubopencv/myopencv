@@ -9,6 +9,8 @@ ob_start();
 //this html MUST be inside the php script, or it is impossible to send headers.
 //CANNOT used mixed PHP/HTML when php header() is used
 //need ob_start buffering so all html goes out at one time, or nothing works
+//the html also needs to be stored in a string, so that it can be printed _AFTER_ the download finishes
+//otherwise html tags end up in the file being downloaded, which causes file corruption
 $html= "<!DOCTYPE html>";
 $html.= "<html>";
 	$html.= "<style>";
@@ -27,8 +29,8 @@ $html.= "<center>";
 	
 
 	//hard code $_GET for debug purposes ONLY
-	$_GET['hash'] = "6516829a1e38e1f920be349e42691207a6295707";
-	$_GET['filename'] = "cartoon-alligator-head-03.jpg";
+	//$_GET['hash'] = "6516829a1e38e1f920be349e42691207a6295707";
+	//$_GET['filename'] = "cartoon-alligator-head-03.jpg";
 	
         $connection = new mysqli('localhost','root','mysql','db');
         if(!$connection)
