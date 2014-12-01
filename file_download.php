@@ -1,32 +1,36 @@
-<!--Tyler Parks-->
-<!--CSCI 430 - Group Scheduler/Manager Project-->
-<!--File Upload-->
+<?php
+//Tyler Parks
+//CSCI 430 - Group Scheduler/Manager Project
+//File Upload
 
-<!DOCTYPE html>
-<html>
+//start buffering, so headers go out all at once
+ob_start();
 
-	<style>
-		header {
-			background-color:black;
-			color:white;
-			text-align:center;
-			padding:5px;	 
-		}
-	</style>
-
-<body>
-<center>
-	<header>
-	<h2>File Download</h2>
-	</header>
+//this MUST be inside the php script, or it is impossible to send headers.
+echo "<!DOCTYPE html>";
+echo "<html>";
+	echo "<style>";
+		echo "header {";
+			echo "background-color:black;";
+			echo "color:white;";
+			echo "text-align:center;";
+			echo "padding:5px;";	 
+		echo "}";
+	echo "</style>";
+echo "<body>";
+echo "<center>";
+	echo "<header>";
+	echo "<h2>File Download</h2>";
+	echo "</header>";
 	
-	<?php
+
+	
 	
         $connection = new mysqli('localhost','root','mysql','db');
         if(!$connection)
         {
                 echo('<p> Unable to connect. Database error. </p>');
-                    exit();
+                $fail = 1;
         }
            
         //raw input, DO NOT trust
@@ -34,9 +38,10 @@
         {  
                 header("HTTP/1.0 400 Bad Request");
                 $fail = 1;
+                exit(); //must exit or buffering errors
         } //end if
         else
-        {
+        {       
                 $hash = $_GET['hash'];
                 $filename = $_GET['filename'];
         }
@@ -70,6 +75,7 @@
                 //file doesn't exist
                 header("HTTP/1.0 404 Not Found");
                 $fail = 1;
+                exit();
         }
         
         //start download if file exists, else 404 error
@@ -152,9 +158,10 @@
                         set_time_limit(0);
                         fseek($file, $seek_start);
                        
-                        while(   !feof($file) ) 
+                        while(   !feof($file) ) //while not end of file
                         {
-                                print( @fread($file, 1024*8) );
+                                ob_start(); //nested output buffer
+                                        print( @fread($file, 1024*8) );
                                 ob_flush();
                                 flush();
                                 
@@ -190,10 +197,15 @@
         //show warning if errors fall through
         if( !empty($fail) )
                 header("HTTP/1.0 500 Internal Server Error");
-        ?>
+ 
+echo "<p><a href='http://localhost/grouphomepage.html'>Go to Group Home page</a></p>";
+echo "<p><a href='http://localhost/file_management.php'>Return to File Management</a></p>";
+echo "</center>";
+echo "</body>";
+echo "</html>";
         
-<p><a href="http://localhost/grouphomepage.html">Go to Group Home page</a></p>
-<p><a href="http://localhost/file_management.php">Return to File Management</a></p>
-</center>
-</body>
-</html>
+        //output buffer contents
+        ob_end_flush();
+?>
+        
+
