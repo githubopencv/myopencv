@@ -24,7 +24,9 @@ echo "<center>";
 	echo "</header>";
 	
 
-	
+	//hard code $_GET for debug purposes ONLY
+	$_GET['hash'] = "6516829a1e38e1f920be349e42691207a6295707";
+	$_GET['filename'] = "cartoon-alligator-head-03.jpg";
 	
         $connection = new mysqli('localhost','root','mysql','db');
         if(!$connection)
@@ -51,7 +53,7 @@ echo "<center>";
         $safehash = addslashes($safehash); //escape special chars
         $safefilename = strip_tags($filename);
         $safefilename = addslashes($safefilename);
-        $path = "uploads/" . $safehash;
+        $path = "/var/www/html/uploads/" . $safehash;
         
         //find file's name and hash in db, to ensure GET passed a real file
         $result = mysqli_query($connection, "select * from db.files where hash='$safehash' limit 1") or die( mysqli_error($connection) );
@@ -64,7 +66,8 @@ echo "<center>";
                 $downloadhash = $row['hash'];
                 $downloadfilename = $row['filename'];
                 $downloadpath = $path . $downloadhash;
-                $filesize = filesize($downloadpath);
+                //$filesize = filesize($downloadpath); //throws "stat failed" error
+                $filesize = $row['filesize'];
                 $pathinfo = pathinfo($downloadfilename);
                 $fileext = $pathinfo['extension'];
                 
