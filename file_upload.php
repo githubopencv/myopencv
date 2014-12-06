@@ -17,7 +17,7 @@ padding:5px;
 //turn on debug messages
 //$debug = true;
 
-$targetDir = "uploads/";
+$targetDir = $_SERVER['DOCUMENT_ROOT']."/uploads/";
 //$target_file = $targetDir . basename($_FILES["fileToUpload"]["name"]);
 
 //Sanitize inputs
@@ -61,7 +61,6 @@ else
 {
         $allowUpload = 1;
 }
-
 
 //store file
 if ($allowUpload)
