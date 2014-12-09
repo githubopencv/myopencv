@@ -150,7 +150,7 @@ if (isset($_POST['members'])) // Get list of group members and emails
 	    exit();
     }
 
-	$result = mysqli_query($connection,"SELECT * FROM groups WHERE username = '$user_name'");
+	$result = mysqli_query($connection,"SELECT * FROM groups WHERE username != '$user_name'");
 	
 	while($row = mysqli_fetch_array($result)) {
 		$group_name = $row['groupname'];
