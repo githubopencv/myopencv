@@ -32,21 +32,33 @@ session_start();
 <form action='join_group_submit.php' method='POST' class='login_form'>
 <?php
 
+	$username = $_SESSION['user_name'];
 	$connection = new mysqli('localhost','root','','user_login');
-    $result = mysqli_query($connection,"SELECT * FROM groups");
-	echo "Choose a Group to Join:";
+    $result2 = mysqli_query($connection,"SELECT groupname FROM groups WHERE username = '$username'");
+	$result = mysqli_query($connection,"SELECT DISTINCT groupname FROM groups WHERE username != '$username'");
+	echo "Choose a Group to join:";
 
 	while($row = mysqli_fetch_array($result))
 	{
-		$name = $row['groupname'];
-		echo "<br>";
-		echo "<br>";
-		echo "<input type='checkbox' name='groupname' value='$name'>$name";
-		echo "<br>";
-		echo "<br>";
-		
-    }
+	    $bool = 1;
+		foreach($result2 as $selected)
+		{
+			if($selected['groupname'] == $row['groupname'])
+			{
+				$bool = 0;
+			}
+		}
+		if($bool == 1)
+		{
+			$name = $row['groupname'];
+			echo "<br>";
+			echo "<br>";
+			echo "<input type='checkbox' name='groupname' value='$name'>$name";
+			echo "<br>";
+		}
+	}
 ?>
+<br>
 <input class='button' type='submit' value='Join Group'>
 <br>
 <br>
