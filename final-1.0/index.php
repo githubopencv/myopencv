@@ -10,6 +10,13 @@ session_start();
 		<link rel="stylesheet" type="text/css" href="login_style.css">
 		</head>
 		<style>
+		
+			body { 
+				background-image: url('./background.png');
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-position: center; 
+			}
         
 			div {
 				background-color: lightgrey;
@@ -38,8 +45,6 @@ session_start();
 $message=' ';
 if(isset($_POST['submit']))
 {
-    /* Check if user is already logged in */
-
     /* Check that both username and password are entered */
     if(!isset( $_POST['username'], $_POST['password']))
     {
@@ -59,7 +64,7 @@ if(isset($_POST['submit']))
         /* Insert username and password to database to log in */
         $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
         $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
-        /* Encrypt password */
+        /* Hash password */
         $password = sha1($password);
         $db_username = 'root';
         $db_password = '';
@@ -97,9 +102,10 @@ if(isset($_POST['submit']))
 <body id="body_color">
 <p><?php echo $message; ?>
 <?php
+
+/* Is user already logged in? */
 if(isset($_SESSION['logged_in']))
 {
-
 	$connection = new mysqli('127.0.0.1','root','','user_login');
 	$temp=$_SESSION['user_name'];
 	$result = mysqli_query($connection,"SELECT * FROM groups WHERE username = '$temp';");
@@ -140,6 +146,8 @@ if(isset($_SESSION['logged_in']))
 		  }
 		 echo "</div>";
 }
+
+/* Members list + their emails */
 if (isset($_POST['members'])) // Get list of group members and emails
 {
 	$user_name = $_SESSION['user_name'];
@@ -149,7 +157,6 @@ if (isset($_POST['members'])) // Get list of group members and emails
         echo('<p> Unable to connect. </p>');
 	    exit();
     }
-
 	$result = mysqli_query($connection,"SELECT * FROM groups WHERE username != '$user_name'");
 	
 	while($row = mysqli_fetch_array($result)) {
@@ -158,36 +165,30 @@ if (isset($_POST['members'])) // Get list of group members and emails
 	
 	$result = mysqli_query($connection,"SELECT * FROM groups WHERE groupname = '$group_name'");
 	
+	echo "<div class='center'>";	
+	echo "<table id='customers'>";
+	echo "<tr>";
+	echo "<th>Member</th>";
+	echo "<th>Email</th>";
+	echo "</tr>";
+	
 	while($row = mysqli_fetch_array($result)) {
 		$user_names = $row['username'];
-		echo "<div class='center'>";
+		echo "<tr><td><center><font color='blue'>";
 		echo $user_names;
-		echo "</div>";
-	}
+		echo "</font></td></center>";
+		$new_result = mysqli_query($connection, "SELECT * FROM usernametable WHERE UserName = '$user_names'");
+		$row = mysqli_fetch_array($new_result);
+		$user_email = $row['email'];
+		echo "<td><center><font color='blue'>";
+		echo $user_email;
+		echo "</font></td></center></tr>";
+	}	
 	
-	
-	//$result = mysqli_query($connection,"SELECT email FROM usernametable WHERE ");
-
-	//while($row = mysqli_fetch_array($result))
-
-
-
-
-
-
-
-
-
+	echo "</div>";
 }
 
-
-
-
-
-
-
-
-
+/* Group meeting schedule */
 if(isset($_POST['calendar']))
 {
 	echo "<div class='center'>";
@@ -390,6 +391,8 @@ if(isset($_POST['calendar']))
 	echo "</table>";
 	echo "</div>";
 }
+
+/* If user is not logged in, display login page */
 if(!isset($_SESSION['logged_in']))
 {  
    echo '
