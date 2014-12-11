@@ -143,8 +143,7 @@ Team Android
     border-color: #ADADAD;
 }
 
-
-/* Schedule */
+/* Group Schedule */
 #customers {
     font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
     width: 100%;
@@ -212,6 +211,7 @@ Team Android
     padding:5px;
 }
 
+/* Nav */
 .linkbutton {
     background:none;
     border:none; 
