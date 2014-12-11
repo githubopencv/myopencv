@@ -18,6 +18,8 @@ padding:5px;
 //$debug = true;
 
 $targetDir = $_SERVER['DOCUMENT_ROOT']."/uploads/";
+$useHashes = false;
+$debug = false;
 //$target_file = $targetDir . basename($_FILES["fileToUpload"]["name"]);
 
 //Sanitize inputs
@@ -29,13 +31,24 @@ if (isset($_POST["submit"]))
     $hash = sha1_file( $_FILES["fileToUpload"]["tmp_name"] );
     $hashDest = $targetDir . $hash;
     
+    if($useHashes == true)
+    {
+       $uploadDest = $hashDest;
+    }
+    else
+    {
+        $uploadDest = $dest;
+    } 
+    
     //debug outputs
     if ( !empty($debug))
     {
             echo "safe name " . $safeName . "<br>";
             echo "file " . $dest . "<br>";
+            echo "temp file size" . $_FILES["fileToUpload"]["size"];
             echo "hash name " . $hash . "<br>";
             echo "hash file: " . $hashDest . "<br>";
+            echo "uploadDest: " . $uploadDest . "<br>";
     } 
 }
 else
@@ -52,7 +65,7 @@ if(!$connection)
 
 // Check if file already exists
 //something a bit more sophisticated should to be done to prevent name/hash collisions
-if (file_exists($hashDest)) 
+if (file_exists($uploadDest)) 
 {
         echo ("Sorry, file already exists.<br>");
         $allowUpload = 0;
@@ -65,14 +78,15 @@ else
 //store file
 if ($allowUpload)
 {
- if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $hashDest)) 
+ if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $uploadDest)) 
  {
         //format for mysql DateTime type
         date_default_timezone_set("America/Los_Angeles");
         $dateTime = date( "Y-m-d H:i:s", time());
         
         //get file size
-        $filesize = $_FILES["fileToUpload"]["size"];
+        //$filesize = $_FILES["fileToUpload"]["size"];
+        $filesize = filesize($uploadDest);
         
         if( !empty($debug))
         {
@@ -86,7 +100,7 @@ if ($allowUpload)
         else
         {
                 //quiet query
-                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, hash) values ('testUser', 'testGroup', '$safeName', '$dateTime', '$hash');");
+                mysqli_query($connection,"insert into db.files (username, groupname, filename, postDateTime, filesize, hash) values ('testUser', 'testGroup', '$safeName', '$dateTime', '$filesize','$hash');");
                 $fail = mysqli_error($connection);
                 
                 if( empty($fail) ) //$fail = "" if no errors

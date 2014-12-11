@@ -7,10 +7,11 @@
   anyone could type <our website>.com/nukeDB.php into firefox,
   and brick our project. Only run from cmd with "php nukeDB.php"
   */
-	$db = "jvillanueva";
+	$db = "db";
 	echo "Dropping tables\n";
 
-	$con = new mysqli("db.ecst.csuchico.edu", "jvillanueva", "H5msvMGK", "jvillanueva", "5551"); //using db, not $db, on purpose 
+	//$con = new mysqli("db.ecst.csuchico.edu", "jvillanueva", "H5msvMGK", "jvillanueva", "5551"); //using db, not $db, on purpose 
+	$con = new mysqli('localhost','root','mysql');
 	mysqli_query($con, "use $db;"); 
 	
 	mysqli_query($con, "drop table $db.login");

@@ -21,6 +21,8 @@
 	</header>
 	
 	<?php
+	$useHashes = false;
+	$targetDir = $_SERVER['DOCUMENT_ROOT']."/uploads/";
 	
         $connection = new mysqli('localhost','root','mysql','db');
         if(!$connection)
@@ -38,7 +40,22 @@
         $safehash = addslashes($safehash); //escape special chars
         $safefilename = strip_tags($filename);
         $safefilename = addslashes($safefilename);
-        $path = "uploads/" . $safehash;
+        
+        if ($useHashes == true)
+        {
+                $path = $targetDir . $safehash;
+        }
+        else
+        {
+                $path = $targetDir . $safefilename;
+        }
+        
+        if ( !empty($debug) )
+        {
+                echo "<center>safehash: $safehash</center>";
+                echo "<center>safefilename: $safefilename</center>";
+                echo "<center>path: $path</center>";
+        }
         
         //remove file from filesystem
         if( unlink($path) )
