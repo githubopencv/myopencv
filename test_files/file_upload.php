@@ -43,17 +43,18 @@ if (isset($_POST["submit"]))
     //debug outputs
     if ( !empty($debug))
     {
-            echo "safe name " . $safeName . "<br>";
-            echo "file " . $dest . "<br>";
-            echo "temp file size" . $_FILES["fileToUpload"]["size"];
-            echo "hash name " . $hash . "<br>";
-            echo "hash file: " . $hashDest . "<br>";
+            echo "safe name: " . $safeName . "<br>";
+            echo "file path: " . $dest . "<br>";
+            echo "temp name: " . $_FILES["fileToUpload"]["tmp_name"] . "<br>";
+            echo "temp file size: " . $_FILES["fileToUpload"]["size"] . "<br>";
+            echo "hash name: " . $hash . "<br>";
+            echo "hash path: " . $hashDest . "<br>";
             echo "uploadDest: " . $uploadDest . "<br>";
     } 
 }
 else
 {
-        die("submission failed"); 
+        die("POST submission failed"); 
 }
 
 //url, user, password, database
