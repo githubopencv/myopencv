@@ -2,7 +2,7 @@ android
 =======
 
 Purpose:
-    To create a fun and competitive game similar to a racing game using rapid button pressing.  Also to compete against friends in a live race. 
+    To create a simple group management website to allow easier scheduling and file sharing. Users will be able to create and/or join groups which will be protected by passwords, see a list of all members in their groups, add their personal available meeting times and get one schedule view which highlights the optimal meeting times for all members. File sharing will allow users to upload files that they wish to share with the group.
     
 Get To Know The Team:
 
@@ -11,7 +11,7 @@ Jared DuBose (Red)
     My skills are Game State and I have a knowledge in Game Engines. I can adapt and learn quickly, having created networked     games, AI, controllers, and have exported to Mobile devices as well as to PCs but never to a market.
     
 Scott Stewart
-    Studying computer engineering and would like to be a hardware programmer.  I enjoy coding and I am a very competitive person.  I am the driving force behind all parts of competition for our game
+    Studying computer engineering and would like to be a hardware programmer.  I enjoy coding and I am a very competitive person. 
 
 James Villanueva
     Studying Computer Engineering with an emphasis on hardware programming. I spend a lot of time programming, as well as playing sports and making pizzas. 
