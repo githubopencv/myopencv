@@ -37,7 +37,7 @@ if (isset($_POST["submit"]))
     }
     else
     {
-        $uploadDest = $dest;
+       $uploadDest = $dest;
     } 
     
     //debug outputs
