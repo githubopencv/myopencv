@@ -116,17 +116,13 @@ $html.= "<center>";
                 //prepare download if file opened successfully, else 500 error
                 if ($file)
                 {
-                        //set headers
-                        header("Pragma: public"); //IE compatability
-                        header("Expires: -1");
-                        header("Cache-Control: public, must-revalidate, post-check=0, pre-check=0");
-                        header("Content-Disposition: attachment; filename=\"$downloadfilename\"");
                         
                         //set MIME type
                         $type_default = "application/octet-stream";
                         $content_types = array(
                                                 "exe" => "application/octet-stream",
                                                 "zip" => "application/zip",
+						"pdf" => "application/pdf",
 						"jpeg"=> "image/jpeg",
 						"jpg" => "image/jpeg",
                                                 "mp3" => "audio/mpeg",
@@ -189,10 +185,18 @@ $html.= "<center>";
 			        header('Content-Length: '. filesize($downloadpath)); //($seek_end - $seek_start + 1));
                         }
                         else
+			{
                                 header("Content-Length: $filesize");
-                        
+                        }
+
                         header("Accept-Ranges: bytes");
                        
+			//firefox wants content length headers before other headers, or it won't recognize MIME types
+                        header("Pragma: public"); //IE compatability
+                        header("Expires: -1");
+                        header("Cache-Control: public, must-revalidate, post-check=0, pre-check=0");
+                        header("Content-Disposition: attachment; filename=\"$downloadfilename\"");
+                        
                         //begin downloading
                         set_time_limit(0);
                         fseek($file, $seek_start);
