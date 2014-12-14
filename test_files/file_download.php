@@ -6,7 +6,7 @@
 //start buffering, so headers go out all at once
 ob_start();
 
-$debug = true;
+$debug = false;
 $useHashes = false;
 $targetDir = $_SERVER['DOCUMENT_ROOT']."/uploads/";
 
@@ -57,7 +57,7 @@ $html.= "<center>";
                 $filename = $_GET['filename'];
         }
         
-        if(  !empty(debug) )
+        if(  !empty($debug) )
         {
                 $html .= "<center>GET hash: $hash</center>";
                 $html .= "<center>GET filename: $filename</center>";
@@ -127,6 +127,8 @@ $html.= "<center>";
                         $content_types = array(
                                                 "exe" => "application/octet-stream",
                                                 "zip" => "application/zip",
+						"jpeg"=> "image/jpeg",
+						"jpg" => "image/jpeg",
                                                 "mp3" => "audio/mpeg",
                                                 "mpg" => "video/mpeg",
                                                 "avi" => "video/x-msvideo",
@@ -160,8 +162,14 @@ $html.= "<center>";
                         }
                        
                         //find download start and end points from range
-                        list($seek_start, $seek_end) = explode('-', $range, 2);
-                       
+			if ($range != '')
+                        	list($seek_start, $seek_end) = explode('-', $range, 2);
+                       	else
+			{
+				$seek_start = 0;
+				$seek_end = abs($filesize - 1);
+			}
+
                         //sanitizing and bounds checking on ranges
                         if ( empty($seek_start) or $seek_end < abs(intval($seek_start)))
                                 $seek_start = 0;
