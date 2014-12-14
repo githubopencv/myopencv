@@ -12,7 +12,7 @@
 	echo "Database setup commenced\n";
 
 //	$connection = new mysqli('db.ecst.csuchico.edu', 'jvillanueva, 'H5msvMGK', 'jvillanueva', '5551');  
-        $connection = new mysqli('localhost','root','mysql');
+        $connection = new mysqli('localhost','root','');
 	//mysqli_query($connection, 'use mysql;');
 	
 	$result = mysqli_query($connection, 'create database db;');

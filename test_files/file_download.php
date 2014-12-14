@@ -36,7 +36,7 @@ $html.= "<center>";
 	//$_GET['hash'] = "6516829a1e38e1f920be349e42691207a6295707";
 	//$_GET['filename'] = "cartoon-alligator-head-03.jpg";
 	
-        $connection = new mysqli('localhost','root','mysql','db');
+        $connection = new mysqli('localhost','root','','db');
         if(!$connection)
         {
                 $html.= ('<p> Unable to connect. Database error. </p>');

@@ -58,7 +58,7 @@ else
 }
 
 //url, user, password, database
-$connection = new mysqli('localhost','root','mysql','db');
+$connection = new mysqli('localhost','root','','db');
 if(!$connection)
 {
         die('<p> Unable to connect, database error. </p>');

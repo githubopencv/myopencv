@@ -1,42 +1,56 @@
-<!--Savpreet Singh-->
-<!--CSCI 430 - Group Scheduler/Manager Project-->
-<!--File Upload-->
+<?php
+session_start();
 
-<!DOCTYPE html>
-<html>
+#can't test user-based code,
+#if(!isset($_SESSION['user_id']))
+#{
+#        echo"<!DOCTYPE html>";
+#        echo"<html>";
+#	        echo"<style>";
+#		        echo"header {background-color:black; color:white; text-align:center; padding:5px;}";
+#	        echo"</style>";
 
-	<style>
-		header {
-			background-color:black;
-			color:white;
-			text-align:center;
-			padding:5px;	 
-		}
-	</style>
+#        echo"<body>";
 
-<body>
+#	        echo"<header>";
+#	        echo"<h2>File Management</h2>";
+#	        echo"</header>";
+#        
+#        $message = '<center>You must be logged in to access this page!</center>';
+#        die($message);
+#} //end if isset session 
+#else
+#{
+echo"<!DOCTYPE html>";
+echo"<html>";
 
-	<header>
-	<h2>File Management</h2>
-	</header>
-	<center><h4>Use this page to manage all shared files.</h4></center>
+	echo"<style>";
+		echo"header {background-color:black; color:white; text-align:center; padding:5px;}";
+	echo"</style>";
 
-	<center>
-	<h>Choose file to upload</h>
-	<br><br>
-	<form action="file_upload.php" method="post" enctype="multipart/form-data">
-            Select file to upload:
-            <input type="file" name="fileToUpload" id="fileToUpload"><br>
-            <input type="submit" value="Upload File" name="submit">
-        </form>
-	</center>
+echo"<body>";
+
+	echo"<header>";
+	echo"<h2>File Management</h2>";
+	echo"</header>";
+	echo"<center><h4>Use this page to manage all shared files.</h4></center>";
+
+	echo"<center>";
+	echo"<h>Choose file to upload</h>";
+	echo"<br><br>";
+	echo"<form action='file_upload.php' method='post' enctype='multipart/form-data'>";
+        echo"Select file to upload:";
+            echo"<input type='file' name='fileToUpload' id='fileToUploa'><br>";
+            echo"<input type='submit' value='Upload File' name='submit'>";
+        echo"</form>";
+	echo"</center>";
 	
-	<br><br><br><br>
-	<h4>Uploaded Files:</h4>
+	echo"<br><br><br><br>";
+	echo"<h4>Uploaded Files:</h4>";
 	
-	<?php
 	
-        $connection = new mysqli('localhost','root','mysql','db');
+	
+        $connection = new mysqli('localhost','root','','db');
         if(!$connection)
         {
                 echo('<p> Unable to connect. Database error. </p>');
@@ -79,9 +93,9 @@
         
         echo "</table>";
 
-       
+        echo"</body></html>";
+
+#} //end else (session is set)       
 	?>
 
-</body>
-</html>
 

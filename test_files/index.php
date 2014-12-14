@@ -118,7 +118,7 @@ echo "</div>";
 echo "</center>";
 echo "<center>";
 echo "<h4>If you need to register, please click here:</h4>";
-echo "<form action='adduser.php' target='_self' action='post'>";
+echo "<form action='user_login/adduser.php' target='_self' action='post'>";
 echo "<input id='button' type='submit' name='submit' value='Register'>";
 echo "</form>";	
 echo "</center>";

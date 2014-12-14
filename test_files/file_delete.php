@@ -24,7 +24,7 @@
 	$useHashes = false;
 	$targetDir = $_SERVER['DOCUMENT_ROOT']."/uploads/";
 	
-        $connection = new mysqli('localhost','root','mysql','db');
+        $connection = new mysqli('localhost','root','','db');
         if(!$connection)
         {
                 echo('<p> Unable to connect. Database error. </p>');
