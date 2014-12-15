@@ -48,16 +48,26 @@ if(isset($_POST['submit']))
     /* Check that both username and password are entered */
     if(!isset( $_POST['username'], $_POST['password']))
     {
-        $message = 'Please enter a valid username and password!';
+        //$message = 'Please enter a valid username and password!';
+		echo '<center>
+			  <h3><font color="red"> Please enter a valid username and password! </font></h3>
+			  </center>';
     }
     /* Check if username and password are 20 characters or less */
     elseif (strlen( $_POST['username']) > 20 || strlen($_POST['username']) < 4)
     {
-        $message = 'Incorrect Length for Username';
+        //$message = 'Incorrect Length for Username';
+		echo '<center>
+			  <h3><font color="red"> Incorrect Length for Username </font></h3>
+			  </center>';
+		
     }
     elseif (strlen( $_POST['password']) > 20 || strlen($_POST['password']) < 4)
     {
-        $message = 'Incorrect Length for Password';
+        //$message = 'Incorrect Length for Password';
+		echo '<center>
+			  <h3><font color="red"> Incorrect Length for Password </font></h3>
+			  </center>';
     }
     else
     {
@@ -82,7 +92,9 @@ if(isset($_POST['submit']))
             $user_id = $insert_user->fetchColumn();
             if($user_id == false)
             {
-                $message = 'Login Failed!';
+				echo '<center>
+					  <h3><font color="red"> Login Failed! Please Try Again. </font></h3>
+					  </center>';
             }
             else
             {

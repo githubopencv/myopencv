@@ -45,14 +45,6 @@ else /* Insert username and password to database */
 	$db_password = '';
 	$db_info = 'mysql:dbname=user_login;host=127.0.0.1';
 	
-	
-	/*
-	$db_username = 'jvillanueva';
-	$db_password = 'H5msvMGK';
-	$db_info = 'mysql:host=db.ecst.csuchico.edu;port=5551;dbname=jvillanueva';
-	$db_info = 'mysql:dbname=jvillanueva;host=db.ecst.csuchico.edu;port=5551';
-	*/
-	
 	try 
 	{
 		
@@ -73,7 +65,8 @@ else /* Insert username and password to database */
 	}
 	catch (PDOException $e) 
 	{
-		$message = $e->getMessage();
+		//$message = $e->getMessage(); // To print out error messages
+		$message = 'Email already exists!';
 	}	
 	catch(Exception $excep)
 	{
@@ -84,8 +77,8 @@ else /* Insert username and password to database */
 		}
 		else /* Other issues */
 		{
-			//$message = 'Unable to add user, contact admin.';
-			$message = $excep->getMessage();
+			$message = 'Unable to add user, contact admin.';
+			//$message = $excep->getMessage(); // To print out error messages
 		}
 	}
 }
@@ -117,6 +110,7 @@ else /* Insert username and password to database */
 	<center>
 		<body id="body_color">
 		<p><?php echo $message; ?>
+		<p><a href='http://localhost/adduser.php?submit=Register'>Return</a></p>
 	</center>
 </body>
 </html>

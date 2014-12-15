@@ -4,6 +4,9 @@
 //File Upload
 //start buffering, so headers go out all at once
 ob_start();
+$debug = false;
+$useHashes = false;
+$targetDir = $_SERVER['DOCUMENT_ROOT']."/uploads/";
 //this html MUST be inside the php script, or it is impossible to send headers.
 //CANNOT used mixed PHP/HTML when php header() is used
 //need ob_start buffering so all html goes out at one time, or nothing works
@@ -13,9 +16,8 @@ $html= "<!DOCTYPE html>";
 $html.= "<html>";
 	$html.= "<style>";
 		$html.= "header {";
-			$html.= "background-color:lightgray;";
-			$html.= "font: 12px 'Helvetica Neue', Helvetica, Arial, sans-serif;";
-			$html.= "color:#888;";
+			$html.= "background-color:black;";
+			$html.= "color:white;";
 			$html.= "text-align:center;";
 			$html.= "padding:5px;";	 
 		$html.= "}";
@@ -51,6 +53,12 @@ $html.= "<center>";
                 $filename = $_GET['filename'];
         }
         
+        if(  !empty($debug) )
+        {
+                $html .= "<center>GET hash: $hash</center>";
+                $html .= "<center>GET filename: $filename</center>";
+        }
+        
         //sanitize input
         $safehash = strip_tags($hash); //remove html tags
         $safehash = addslashes($safehash); //escape special chars
@@ -67,15 +75,24 @@ $html.= "<center>";
         {
                 //organize file metadata
                 $downloadhash = $row['hash'];
-                $downloadfilename = $row['filename'];
-                $path = "/var/www/html/uploads/";
-                $downloadpath = $path . $downloadhash;
+                $downloadfilename = $row['filename'];               
+                
                 //$filesize = filesize($downloadpath); //throws "stat failed" error
                 $filesize = $row['filesize'];
-                $pathinfo = pathinfo($downloadfilename);
+                $pathinfo = pathinfo($downloadfilename); //get dirname, basename filename, extension 
                 $fileext = $pathinfo['extension'];
                 
-                
+                if ($useHashes == true) 
+                {
+                        $downloadpath = $targetDir . $downloadhash;
+                }
+                else 
+                {
+                        $downloadpath = $targetDir . $downloadfilename;
+                }        
+                if (!empty($debug))
+                        $html .= "<center> Download path: $downloadpath </center>";
+                        
         } //end if !empty
         else
         {
@@ -95,17 +112,15 @@ $html.= "<center>";
                 //prepare download if file opened successfully, else 500 error
                 if ($file)
                 {
-                        //set headers
-                        header("Pragma: public"); //IE compatability
-                        header("Expires: -1");
-                        header("Cache-Control: public, must-revalidate, post-check=0, pre-check=0");
-                        header("Content-Disposition: attachment; filename=\"$downloadfilename\"");
                         
                         //set MIME type
                         $type_default = "application/octet-stream";
                         $content_types = array(
                                                 "exe" => "application/octet-stream",
                                                 "zip" => "application/zip",
+						"pdf" => "application/pdf",
+						"jpeg"=> "image/jpeg",
+						"jpg" => "image/jpeg",
                                                 "mp3" => "audio/mpeg",
                                                 "mpg" => "video/mpeg",
                                                 "avi" => "video/x-msvideo",
@@ -139,8 +154,13 @@ $html.= "<center>";
                         }
                        
                         //find download start and end points from range
-                        list($seek_start, $seek_end) = explode('-', $range, 2);
-                       
+			if ($range != '')
+                        	list($seek_start, $seek_end) = explode('-', $range, 2);
+                       	else
+			{
+				$seek_start = 0;
+				$seek_end = abs($filesize - 1);
+			}
                         //sanitizing and bounds checking on ranges
                         if ( empty($seek_start) or $seek_end < abs(intval($seek_start)))
                                 $seek_start = 0;
@@ -157,13 +177,20 @@ $html.= "<center>";
                         {
                                 header("HTTP/1.1 206 Partial Content");
                                 header('Content-Range: bytes '.$seek_start.'-'.$seek_end.'/'.$file_size);
-			        header('Content-Length: '.($seek_end - $seek_start + 1));
+			        header('Content-Length: '. filesize($downloadpath)); //($seek_end - $seek_start + 1));
                         }
                         else
+			{
                                 header("Content-Length: $filesize");
-                        
+                        }
                         header("Accept-Ranges: bytes");
                        
+			//firefox wants content length headers before other headers, or it won't recognize MIME types
+                        header("Pragma: public"); //IE compatability
+                        header("Expires: -1");
+                        header("Cache-Control: public, must-revalidate, post-check=0, pre-check=0");
+                        header("Content-Disposition: attachment; filename=\"$downloadfilename\"");
+                        
                         //begin downloading
                         set_time_limit(0);
                         fseek($file, $seek_start);
@@ -204,7 +231,7 @@ $html.= "<center>";
                 header("HTTP/1.0 404 Not Found");
                 $html.= "<center>File $downloadpath</center>";
                 $html.= "<center>" . "search result " . file_exists($downloadpath) . "</center>";
-                $html.= "<center>Fail: $fail</center>";
+                //$html.= "<center>Fail: $fail</center>";
                 $html.= "<center>File not in filesystem</center>";
                 $html.= "<center>HTTP/1.0 404 Not Found</center>";
                 //$fail = 1;
@@ -217,7 +244,7 @@ $html.= "<center>";
                 header("HTTP/1.0 500 Internal Server Error");
                 echo "<center>HTTP/1.0 500 Internal Server Error</center>";
         }*/
-$html.= "<p><a href='http://localhost/grouphomepage.html'>Go to Group Home page</a></p>";
+$html.= "<p><a href='http://localhost/index.php'>Go to Group Home page</a></p>";
 $html.= "<p><a href='http://localhost/file_management.php'>Return to File Management</a></p>";
 $html.= "</center>";
 $html.= "</body>";
@@ -227,4 +254,3 @@ $html.= "</html>";
         echo $html;
         ob_end_flush();
 ?>
-        
