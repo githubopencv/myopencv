@@ -23,7 +23,10 @@ Our MySQL database tables were set up as such:
 	create table files(
 		username varchar(255),
 		groupname varchar(255),
-		filename text
+		filename text,
+		postDateTime timstamp not null,
+		filesize varchar(255),
+		hash varchar(255)
 	);
 
 /* Handles user registration, login */
