@@ -9,24 +9,26 @@ session_start();
 
 <html>
 <head>
-<title> Join A Group </title>
-<link rel="stylesheet" type="text/css" href="login_style.css">
+	<title> Join A Group </title>
+	<link rel="stylesheet" type="text/css" href="login_style.css">
 </head>
-<style>
-	header {
-		background-color:lightgray;
-		font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
-		color: #888;
-		text-align:center;
-		padding:5px;
-	}
-</style>
+	<style>
+		header {
+			background-color:lightgray;
+			font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+			color: #888;
+			text-align:center;
+			padding:5px;
+		}
+	</style>
 <body>
 <body id='body_color'>
 <header>
 	<h2>Welcome to the Group Management Project!</h2>
 </header>
 <?php
+
+/* Is user logged in? */
 if(!isset($_SESSION['logged_in']))
 {
 	echo '<form action="adduser.php" target="_self" action="post" class="login_form">
@@ -59,7 +61,6 @@ if(isset($_POST['submit2']))
 		mysqli_query($connection,"INSERT INTO groups (username,groupname,password) VALUES ('$username','$groupname','$password')");
 		$result = mysqli_query($connection,"SELECT * FROM calendar where username = '$username';");
   
-	
 		while($row = mysqli_fetch_array($result))
 		{
 			$day = $row['day'];
@@ -83,22 +84,16 @@ if(isset($_POST['submit2']))
 			</center>';
 	}
 	else
-	{
-		
-	    echo "$password";
-		echo "<br>";
-		echo "$temp";
-		echo "Incorrect password:";
-		echo "<br>";
-
+	{		
+		echo '<center><h2><font color="red"> Incorrect password! </center></h2></font>';
+		echo '<br>';
+		echo '<br>';
+		echo '<p><center><a href="http://localhost/index.php">Return Home</a></center></p>';
 	}
-
-
 }
 else
 {
-
-		$_SESSION['groupname'] = $_POST['groupname'];
+	$_SESSION['groupname'] = $_POST['groupname'];
 
 	echo "<br>";
 	echo "<br>";
@@ -115,7 +110,6 @@ else
 	echo "<br></label></center>";
 	echo "</form>";
 }
-
 ?>
 
 </form>
